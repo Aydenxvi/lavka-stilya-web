@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лавка Стиля | Premium Aesthetic Drop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            --accent-gradient: linear-gradient(90deg, #ff7b90 0%, #ffae7d 100%);
+            --card-gradient: linear-gradient(145deg, #ffffff 0%, #f1f5f9 100%);
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --text-dark: #1e293b;
+            --text-light: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        body {
+            background: var(--primary-gradient);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* --- 1. СТЕКЛЯННАЯ ФОРМА РЕГИСТРАЦИИ --- */
+        .reg-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--glass-border);
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            width: 360px;
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #ff7b90;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(255, 123, 144, 0.3);
+        }
+
+        .reg-container h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 16px;
+            margin-bottom: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-light);
+            font-size: 14px;
+            outline: none;
+        }
+
+        .input-group input::placeholder {
+            color: #cbd5e1;
+        }
+
+        .input-group input:focus {
+            border-color: #ffae7d;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .submit-btn {
+            background: var(--accent-gradient);
+            color: #0f2027;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 10px 20px rgba(255, 123, 144, 0.2);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(255, 123, 144, 0.4);
+        }
+
+        .footer-text {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .footer-text a {
+            color: #ffae7d;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* --- 2. СТРАНИЦА МАГАЗИНА (СКРЫТА ДО КЛИКА) --- */
+        #shop-page {
+            display: none;
+            width: 100%;
+            min-height: 100vh;
+            background: #0b0f19;
+            color: var(--text-dark);
+        }
+
+        /* Вайбовый хэдер */
+        header {
+            background: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cart-icon {
+            background: rgba(255,255,255,0.05);
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+        }
+
+        #cart-count {
+            background: #ff7b90;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+
+        .main-content {
+            margin-top: 120px;
+            padding: 0 5% 60px 5%;
+            text-align: center;
+        }
+
+        .shop-intro h2 {
+            color: var(--text-light);
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .shop-intro p {
+            color: #64748b;
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+
+        /* СЕТКА ТОВАРОВ + ИХ 3D СТРУКТУРА */
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            perspective: 1000px; /* Важно для 3D */
+        }
+
+        .product-card {
+            background: var(--card-gradient);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            position: relative;
+            transform-style: preserve-3d; /* Врубаем 3D для вложенных элементов */
+            transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.5s;
+        }
+
+        /* Наведение: Элемент плавно наклоняется в 3D плоскости и приподнимается */
+        .product-card:hover {
+            transform: translateY(-10px) rotateX(7deg) rotateY(-7deg);
+            box-shadow: 0 25px 40px rgba(255, 123, 144, 0.15);
+        }
+
+        .image-wrapper {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            border-radius: 16px;
+            margin-bottom: 15px;
+            background: #1e293b;
+            transform: translateZ(20px); /* Выталкиваем картинку вперед в 3D */
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.08);
+        }
+
+        .product-info {
+            transform: translateZ(10px);
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 10px 0 5px 0;
+        }
+
+        .product-price {
+            font-size: 16px;
+            color: #257db9;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart-btn {
+            background: #1e293b;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 12px;
+            width: 100%;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .add-to-cart-btn:hover {
+            background: var(--accent-gradient);
+            color: #0f2027;
+        }
+
+        /* Уведомление-тост */
+        .toast {
+            position: fixed;
+            bottom: -100px; right: 20px;
+            background: var(--accent-gradient);
+            color: #0f2027;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .toast.show { bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="reg-container" id="reg-block">
+        <img src="orkhan.jpeg" alt="Лавка Стиля" class="profile-photo" onerror="this.src='https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=300'">
+        <h1>Лавка Стиля</h1>
+        <form onsubmit="enterTheShop(event)">
+            <div class="input-group">
+                <input type="text" placeholder="Юзернейм" required>
+                <input type="email" placeholder="Электронная почта" required>
+                <input type="password" placeholder="Пароль" required>
+            </div>
+            <button type="submit" class="submit-btn">Получить доступ к дропу</button>
+        </form>
+        <div class="footer-text">
+            Уже в банде? <a href="#">Войти</a>
+        </div>
+    </div>
+
+    <div id="shop-page">
+        <header>
+            <div class="logo">🛍 ЛАВКА СТИЛЯ</div>
+            <div class="cart-icon">Корзина <span id="cart-count">0</span></div>
+        </header>
+
+        <main class="main-content">
+            <div class="shop-intro">
+                <h2>AESTHETIC DROP '26</h2>
+                <p>Твой личный пропуск в мир уличного стиля и премиального качества.</p>
+            </div>
+
+            <div class="products-container">
+                <div class="product-card">
+                    <div class="image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400" class="product-img" alt="Бомбер">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Бомбер Оверсайз</div>
+                        <div class="product-price">4 500 ₽</div>
+                        <button class="add-to-cart-btn" onclick="buyItem('Бомбер Оверсайз')">В корзину</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=400" class="product-img" alt="Худи">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Худи Базовое (White)</div>
+                        <div class="product-price">2 900 ₽</div>
+                        <button class="add-to-cart-btn" onclick="buyItem('Худи Базовое')">В корзину</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400" class="product-img" alt="Сникеры">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Сникеры Кэжуал</div>
+                        <div class="product-price">5 200 ₽</div>
+                        <button class="add-to-cart-btn" onclick="buyItem('Сникеры Кэжуал')">В корзину</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=400" class="product-img" alt="Свитшот">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Свитшот Тёмный Оникс</div>
+                        <div class="product-price">3 200 ₽</div>
+                        <button class="add-to-cart-btn" onclick="buyItem('Свитшот Тёмный Оникс')">В корзину</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400" class="product-img" alt="Очки">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Очки Cyber Punk</div>
+                        <div class="product-price">1 800 ₽</div>
+                        <button class="add-to-cart-btn" onclick="buyItem('Очки Cyber Punk')">В корзину</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400" class="product-img" alt="Сумка">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Сумка-кроссбоди</div>
+                        <div class="product-price">3 900 ₽</div>
+                        <button class="add-to-cart-btn" onclick="buyItem('Сумка-кроссбоди')">В корзину</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400" class="product-img" alt="Косуха">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Куртка Куртка-Косуха</div>
+                        <div class="product-price">7 500 ₽</div>
+                        <button class="add-to-cart-btn" onclick="buyItem('Куртка-Косуха')">В корзину</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400" class="product-img" alt="Кепка">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Панама Street Камо</div>
+                        <div class="product-price">1 400 ₽</div>
+                        <button class="add-to-cart-btn" onclick="buyItem('Панама Street Камо')">В корзину</button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <div id="toast-notif" class="toast">Товар добавлен в корзину! ⚡</div>
+
+    <script>
+        // Вход в магазин
+        function enterTheShop(event) {
+            event.preventDefault();
+            
+            // Плавное исчезновение формы
+            const regBlock = document.getElementById('reg-block');
+            regBlock.style.opacity = '0';
+            regBlock.style.transform = 'scale(0.9)';
+            
+            setTimeout(() => {
+                regBlock.style.display = 'none';
+                // Врубаем сам сайт
+                const shopPage = document.getElementById('shop-page');
+                shopPage.style.display = 'block';
+                document.body.style.display = 'block';
+                document.body.style.background = '#0b0f19';
+            }, 400);
+        }
+
+        // Логика инкремента корзины и всплывающего тоста
+        let count = 0;
+        function buyItem(itemName) {
+            count++;
+            document.getElementById('cart-count').innerText = count;
+            
+            const toast = document.getElementById('toast-notif');
+            toast.innerText = `🔥 ${itemName} добавлен!`;
+            toast.classList.add('show');
+            
+            // Прячем тост через 2.5 секунды
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
